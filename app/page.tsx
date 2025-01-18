@@ -8,13 +8,14 @@ const Chat = dynamic(() => import("@/components/Chat"), {
 export default async function Page() {
   const accessToken = await getHumeAccessToken();
 
-  if (!accessToken) {
+  if (accessToken) {
     throw new Error();
   }
 
   return (
     <div className={"grow flex flex-col"}>
-      <Chat accessToken={accessToken} />
+      {/* <Chat accessToken={accessToken} /> */}
+      <Chat accessToken=""/>
     </div>
   );
 }
