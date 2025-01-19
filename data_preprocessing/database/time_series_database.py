@@ -21,7 +21,7 @@ cursor.execute(create_table_query)
 conn.commit()
 
 # Clear the table
-cursor.execute(f"DELETE FROM {table_name};")
+#cursor.execute(f"DELETE FROM {table_name};")
 conn.commit()
 
 # Reset the id count
@@ -79,17 +79,19 @@ results = query_data(conn)
 
 def last_n_elements(n):
     query = f"""
-    SELECT * FROM {table_name}
+    SELECT date, mood, summary
+    FROM {table_name}
     ORDER BY id DESC
     LIMIT {n}
     """
     cursor.execute(query)
-    return cursor.fetchall()
+    print(cursor.fetchall())
 
 #TESTING
-# last_1_row = last_n_elements(1)
+last_n_elements(5)
 # print("Last 1 Rows:")
-# for row in last_1_row:
+# print(last_5_row)
+# for row in last_5_row:
 #     print(row)
 
 conn.close()

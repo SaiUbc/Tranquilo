@@ -38,7 +38,7 @@ def get_response(num):
     return responses
 
 
-def reranking(input_str, num):
+def reranking(input_str, num, rank = 3):
     responses = get_response(num)
 
     all_texts = [input_str] + responses
@@ -56,7 +56,13 @@ def reranking(input_str, num):
     similarity_dict = {responses[i]: similarities[i] for i in range(len(responses))}
     sorted_similarity_dict = dict(sorted(similarity_dict.items(), key=lambda x: x[1], reverse=True))
     
-    print(sorted_similarity_dict.values())
+    list = sorted_similarity_dict.keys()
+    for i, element in enumerate(list):
+        if i >= rank:
+            break
+        print(element)
+
+    # print_first_three_elements(list)
     return sorted_similarity_dict
 
 reranking("Is being friends with this person safe for you?Liars don't generally distinguish who they bring down with them or in service", 145)
