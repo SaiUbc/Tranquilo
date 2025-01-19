@@ -1,12 +1,13 @@
 "use client";
 
 import { useLayoutEffect, useState } from "react";
-import HumeLogo from "./logos/Hume";
+import HumeLogo from "./logos/Tranquilo";
 import { Button } from "./ui/button";
 import { Moon, Sun } from "lucide-react";
-import pkg from '@/package.json';
+import { useRouter } from "next/navigation";
 
 export const Nav = () => {
+  const router = useRouter();
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useLayoutEffect(() => {
@@ -32,16 +33,12 @@ export const Nav = () => {
       }
     >
       <div>
-        <HumeLogo className={"h-5 w-auto"} />
+        <HumeLogo className={"h-5 w-auto"} onClick={() => router.push("/")}/>
       </div>
       <div className={"ml-auto flex items-center gap-1"}>
         <Button
           onClick={() => {
-            window.open(
-              pkg.homepage,
-              "_blank",
-              "noopener noreferrer"
-            );
+            router.push("/dashboard");
           }}
           variant={"ghost"}
           className={"ml-auto flex items-center gap-1.5"}

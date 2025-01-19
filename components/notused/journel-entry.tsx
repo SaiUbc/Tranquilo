@@ -7,8 +7,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { cn } from "@/utils"
 import { Toggle } from "@radix-ui/react-toggle"
-import { useVoice } from "@humeai/voice-react"
-import MicFFT from "./MicFFT";
+// import { useVoice } from "@humeai/voice-react"
+// import MicFFT from "./MicFFT";
 
 export function JournalEntry() {
   const [isRecording, setIsRecording] = useState(false)
@@ -20,8 +20,6 @@ export function JournalEntry() {
   const analyserRef = useRef<AnalyserNode | null>(null)
   const mediaStreamRef = useRef<MediaStream | null>(null)
   const animationFrameRef = useRef<number>()
-
-  const { disconnect, status, isMuted, unmute, mute, micFft } = useVoice();
 
   useEffect(() => {
     return () => {
@@ -123,22 +121,6 @@ export function JournalEntry() {
             />
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={toggleTyping}>
-                <Toggle
-                    pressed={!isMuted}
-                    onPressedChange={() => {
-                        if (isMuted) {
-                        unmute();
-                        } else {
-                        mute();
-                        }
-                    }}
-                >
-                {isMuted ? (
-                    <MicOff className={"size-4"} />
-                ) : (
-                    <Mic className={"size-4"} />
-                )}
-                </Toggle>
                 Use Voice
               </Button>
               <Button onClick={handleSubmit} disabled={!entry.trim()}>
@@ -175,9 +157,9 @@ export function JournalEntry() {
             </span>
           </Button>
 
-          <div className={"relative grid h-8 w-48 shrink grow-0"}>
+          {/* <div className={"relative grid h-8 w-48 shrink grow-0"}>
               <MicFFT fft={micFft} className={"fill-current"} />
-          </div>
+          </div> */}
 
           <div className="flex gap-2">
             <Button

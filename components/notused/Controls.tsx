@@ -1,14 +1,14 @@
 "use client";
 import { useVoice } from "@humeai/voice-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { Mic, MicOff, Phone, Keyboard, Send } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Toggle } from "./ui/toggle";
+import { Toggle } from "../ui/toggle";
 import MicFFT from "./MicFFT";
 import { cn } from "@/utils";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "./ui/card";
+import { Card, CardContent } from "../ui/card";
 
 
 export default function Controls() {

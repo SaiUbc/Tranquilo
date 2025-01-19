@@ -19,16 +19,6 @@ exports.modules = {
 
 eval("\n\n/** @type {import('.')} */\nmodule.exports = Object;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHNzcikvLi9ub2RlX21vZHVsZXMvZXMtb2JqZWN0LWF0b21zL2luZGV4LmpzIiwibWFwcGluZ3MiOiJBQUFhOztBQUViLFdBQVcsYUFBYTtBQUN4QiIsInNvdXJjZXMiOlsid2VicGFjazovL2h1bWUtZXZpLW5leHQtanMtc3RhcnRlci8uL25vZGVfbW9kdWxlcy9lcy1vYmplY3QtYXRvbXMvaW5kZXguanM/Y2Q5YyJdLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbi8qKiBAdHlwZSB7aW1wb3J0KCcuJyl9ICovXG5tb2R1bGUuZXhwb3J0cyA9IE9iamVjdDtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(ssr)/./node_modules/es-object-atoms/index.js\n");
 
-/***/ }),
-
-/***/ "(rsc)/./node_modules/es-object-atoms/index.js":
-/*!***********************************************!*\
-  !*** ./node_modules/es-object-atoms/index.js ***!
-  \***********************************************/
-/***/ ((module) => {
-
-eval("\n\n/** @type {import('.')} */\nmodule.exports = Object;\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKHJzYykvLi9ub2RlX21vZHVsZXMvZXMtb2JqZWN0LWF0b21zL2luZGV4LmpzIiwibWFwcGluZ3MiOiJBQUFhOztBQUViLFdBQVcsYUFBYTtBQUN4QiIsInNvdXJjZXMiOlsid2VicGFjazovL2h1bWUtZXZpLW5leHQtanMtc3RhcnRlci8uL25vZGVfbW9kdWxlcy9lcy1vYmplY3QtYXRvbXMvaW5kZXguanM/ZDkwZiJdLCJzb3VyY2VzQ29udGVudCI6WyIndXNlIHN0cmljdCc7XG5cbi8qKiBAdHlwZSB7aW1wb3J0KCcuJyl9ICovXG5tb2R1bGUuZXhwb3J0cyA9IE9iamVjdDtcbiJdLCJuYW1lcyI6W10sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///(rsc)/./node_modules/es-object-atoms/index.js\n");
-
 /***/ })
 
 };

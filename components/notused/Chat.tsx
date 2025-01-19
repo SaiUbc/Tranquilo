@@ -5,7 +5,6 @@ import Messages from "./Messages";
 import Controls from "./Controls";
 import StartCall from "./StartCall";
 import { ComponentRef, useRef } from "react";
-import { JournalEntry } from "./journel-entry";
 
 export default function ClientComponent({
   accessToken,
@@ -46,8 +45,6 @@ export default function ClientComponent({
       >
         <Messages ref={ref} />
         <Controls />
-        {/* <JournalEntry /> */}
-
         <StartCall />
       </VoiceProvider>
     </div>

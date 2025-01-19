@@ -1,28 +1,20 @@
-import { JournalEntryy } from "@/components/je";
-import { JournalEntry } from "@/components/journel-entry";
-import { getHumeAccessToken } from "@/utils/getHumeAccessToken";
-import dynamic from "next/dynamic";
+'use client';
 
-const Chat = dynamic(() => import("@/components/Chat"), {
-  ssr: false,
-});
+import { useRouter } from 'next/navigation'
+import EmotionDashboard from "@/components/Dashboard";
+import { RecordingInterface } from '@/components/RecordingInterface';
+import { CharacterPrompt } from '@/components/character-prompt';
+import { JournalInput } from '@/components/Journal-input';
 
 export default async function Page() {
-  const accessToken = await getHumeAccessToken();
-
-  if (!accessToken) {
-    throw new Error();
-  }
+  const router = useRouter();
 
   return (
     <div className={"grow flex flex-col"}>
-      
-      <main className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-          <div className="w-full max-w-lg space-y-8">
-          <Chat accessToken={accessToken} />
-            {/* <JournalEntry /> */}
-            {/* <JournalEntryy /> */}
-          </div>
+      <main className="min-h-screen bg-background flex flex-col items-center justify-center">
+        <CharacterPrompt />
+        <JournalInput />
+        {/* <EmotionDashboard /> */}
       </main>
     </div>
   );
