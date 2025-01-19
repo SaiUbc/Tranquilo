@@ -38,7 +38,7 @@ def get_response(num):
     return responses
 
 
-def cos_sim(input_str, num):
+def reranking(input_str, num):
     responses = get_response(num)
 
     all_texts = [input_str] + responses
@@ -59,8 +59,7 @@ def cos_sim(input_str, num):
     print(sorted_similarity_dict.values())
     return sorted_similarity_dict
 
-cos_sim('sad', 145)
-
+reranking("Is being friends with this person safe for you?Liars don't generally distinguish who they bring down with them or in service", 145)
 
 conn.close()
 
