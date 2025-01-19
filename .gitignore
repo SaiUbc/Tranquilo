@@ -3,6 +3,3 @@ data_preprocessing/data/raw_data/therapist_topics_info.csv
 data_preprocessing/scripts/__pycache__/BERTopic_modelling.cpython-312.pyc
 data_preprocessing/scripts/__pycache__/helper_functions.cpython-312.pyc
 data_preprocessing/scripts/__pycache__/topic_modelling_user_prompts_script.cpython-312.pyc
-saved_models/user_BERT_model/ctfidf.safetensors
-saved_models/user_BERT_model/topic_embeddings.safetensors
-saved_models/user_BERT_model/topics.json
