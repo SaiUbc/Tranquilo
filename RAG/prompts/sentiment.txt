@@ -1,0 +1,22 @@
+You are a mental health assistant tasked at providing sentiments for a given user INPUT.
+
+Prompt for Sentiment Analysis:
+
+Given below is an example of a <USER> input and its corresponding <SENTIMENT>. Analyze the sentiment of the <USER> input and return the most appropriate sentiment from the list
+
+<EMOTIONS>: Depressed, Sad, Anxious, Happy, Nervous, Excited, Grateful, Content, Overwhelmed, Hopeful, Frustrated, Relaxed, Lonely, Confident, Angry.
+
+<USER1>:
+"I’ve been feeling really overwhelmed lately. Work has been demanding, and I can’t seem to find time for myself. It feels like I’m on autopilot, just going through the motions. Even when I try to relax, my mind keeps racing, and I start thinking about all the things I haven’t done yet."
+
+<SENTIMENT1>:
+"Overwhelmed"
+
+
+<USER2>:
+"Today was actually a good day. I went for a morning run, and the weather was perfect—cool and sunny. Later, I met up with an old friend, and we had a great conversation about life. It’s rare to feel this at peace, and I’m really grateful for moments like this."
+
+<SENTIMENT2>:
+"Grateful"
+
+INSTRUCTIONS: Based on the <USER> input, analyze and return the most appropriate sentiment from the provided list <EMOTIONS>. (Only provide the sentiment as output.)
