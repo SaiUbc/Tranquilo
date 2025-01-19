@@ -22,6 +22,7 @@ cursor.execute(query)
 
 #TODO: update database after sorting unless it sorts in place
 
+
 rows = cursor.fetchall()
 
 print(f"user_topic: {rows[249][3]}")
@@ -56,7 +57,7 @@ def cos_sim(input_str, num):
     similarity_dict = {responses[i]: similarities[i] for i in range(len(responses))}
     sorted_similarity_dict = dict(sorted(similarity_dict.items(), key=lambda x: x[1], reverse=True))
     
-    print(sorted_similarity_dict.values())
+    print(sorted_similarity_dict)
     return sorted_similarity_dict
 
 cos_sim('sad', 145)
