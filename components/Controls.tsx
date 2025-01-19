@@ -1,14 +1,31 @@
 "use client";
 import { useVoice } from "@humeai/voice-react";
 import { Button } from "./ui/button";
-import { Mic, MicOff, Phone } from "lucide-react";
+import { Mic, MicOff, Phone, Keyboard, Send } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Toggle } from "./ui/toggle";
 import MicFFT from "./MicFFT";
 import { cn } from "@/utils";
+import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent } from "./ui/card";
+
 
 export default function Controls() {
   const { disconnect, status, isMuted, unmute, mute, micFft } = useVoice();
+  const [isTyping, setIsTyping] = useState(false);
+  const [entry, setEntry] = useState("");
+
+  const toggleTyping = () => {
+    setIsTyping(!isTyping);
+  }
+
+  const handleSubmit = () => {
+    // Here you would handle the text submission
+    console.log("Submitted entry:", entry)
+    setEntry("")
+    setIsTyping(false)
+  }
 
   return (
     <div
@@ -19,7 +36,29 @@ export default function Controls() {
         )
       }
     >
-      <AnimatePresence>
+      {isTyping ? (
+        <Card className="relative">
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-4">
+              <Textarea
+                placeholder="Type your journal entry here..."
+                value={entry}
+                onChange={(e) => setEntry(e.target.value)}
+                className="min-h-[200px] min-w-[400px] resize-none"
+              />
+              <div className="flex justify-end gap-2">
+                <Button variant="outline" onClick={toggleTyping}>
+                  Cancel
+                </Button>
+                <Button onClick={handleSubmit} disabled={!entry.trim()}>
+                  <Send className="mr-2 h-4 w-4" />
+                  Submit
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ) : ( <AnimatePresence>
         {status.value === "connected" ? (
           <motion.div
             initial={{
@@ -58,6 +97,16 @@ export default function Controls() {
             <div className={"relative grid h-8 w-48 shrink grow-0"}>
               <MicFFT fft={micFft} className={"fill-current"} />
             </div>
+            
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={toggleTyping}
+              className="h-16 w-16 rounded-full"
+            >
+              <Keyboard className="h-6 w-6" />
+              <span className="sr-only">Type Instead</span>
+            </Button>
 
             <Button
               className={"flex items-center gap-1"}
@@ -77,7 +126,7 @@ export default function Controls() {
             </Button>
           </motion.div>
         ) : null}
-      </AnimatePresence>
+      </AnimatePresence>)}
     </div>
   );
 }
