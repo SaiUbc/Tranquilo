@@ -39,6 +39,7 @@ export function RecordingInterface({ onClose }: RecordingInterfaceProps) {
   const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
 
+  console.log('transcript:', transcript);
   let recognition: SpeechRecognition | null = null;
 
   // Initialize Web Speech API

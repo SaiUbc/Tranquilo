@@ -14,7 +14,6 @@ export default async function Page() {
       <main className="min-h-screen bg-background flex flex-col items-center justify-center">
         <CharacterPrompt />
         <JournalInput />
-        {/* <EmotionDashboard /> */}
       </main>
     </div>
   );

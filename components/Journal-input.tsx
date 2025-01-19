@@ -10,11 +10,20 @@ import { Mic, Keyboard } from 'lucide-react'
 export function JournalInput() {
   const router = useRouter()
   const [showTextInput, setShowTextInput] = useState(false)
+  const [journalEntry, setJournalEntry] = useState('') // State to store the user's input
+  const [savedEntry, setSavedEntry] = useState('') // State to store the saved result
 
   const startRecording = () => {
     router.push('/record')
   }
 
+  const handleSave = () => {
+    setSavedEntry(journalEntry) // Save the user's input
+    setShowTextInput(false) // Hide the input form
+    setJournalEntry('') // Clear the input field
+  }
+  console.log(savedEntry)
+  console.log(journalEntry)
   return (
     <Card className="max-w-2xl mx-auto">
       <CardContent className="p-6">
@@ -23,12 +32,14 @@ export function JournalInput() {
             <Textarea
               placeholder="Write about your day..."
               className="min-h-[200px] min-w-[400px]"
+              value={journalEntry}
+              onChange={(e) => setJournalEntry(e.target.value)} // Update input state
             />
             <div className="flex justify-end gap-2">
               <Button variant="outline" onClick={() => setShowTextInput(false)}>
                 Cancel
               </Button>
-              <Button>Save Entry</Button>
+              <Button onClick={handleSave}>Save Entry</Button>
             </div>
           </div>
         ) : (
@@ -52,8 +63,14 @@ export function JournalInput() {
             </div>
           </div>
         )}
+
+        {savedEntry && ( // Display the saved entry if it exists
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold">✨ Your Journal Entry:</h3>
+            <p className="mt-2 p-4 bg-gray-100 border rounded">{savedEntry}</p>
+          </div>
+        )}
       </CardContent>
     </Card>
   )
 }
-

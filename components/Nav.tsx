@@ -1,10 +1,11 @@
 "use client";
 
 import { useLayoutEffect, useState } from "react";
-import HumeLogo from "./logos/Tranquilo";
+import Logo from "@/public/logo.png";
 import { Button } from "./ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export const Nav = () => {
   const router = useRouter();
@@ -33,7 +34,7 @@ export const Nav = () => {
       }
     >
       <div>
-        <HumeLogo className={"h-5 w-auto"} onClick={() => router.push("/")}/>
+        <Image src={Logo} alt="Tranquilo" width={50} height={50} onClick={() => router.push("/")}/>
       </div>
       <div className={"ml-auto flex items-center gap-1"}>
         <Button
