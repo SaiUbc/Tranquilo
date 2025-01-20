@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Mic, Keyboard } from 'lucide-react'
+import { LocalStorage } from 'node-localstorage';
 
 export function JournalInput() {
   const router = useRouter()
@@ -15,6 +16,11 @@ export function JournalInput() {
   const [result, setResult] = useState(''); // State to store the LLM result
 
   // const [postResponse, setPostResponse] = useState('')
+
+  
+
+  // Initialize node-localstorage (store data in a directory named 'storage')
+  const localStorage = new LocalStorage('./storage');
 
   const startRecording = () => {
     router.push('/record')
@@ -44,10 +50,11 @@ export function JournalInput() {
                 const result = await response.json();
                 result.final_response = result.final_response?.response || 'No response available';
                                 // Get an item
-                const userInput = localStorage.getItem('userInput') || 'No response available';
-                console.log('User input:', userInput);
+                // const userInput = localStorage.getItem('userInput') || 'No response available';
+                // console.log('User input:', userInput);
 
-                setResult(result.final_response || userInput || 'No response');
+                setResult(result.final_response || 'No response');
+                localStorage.setItem('llmResponse', result.final_response);
               } catch (error) {
                   console.error("Error making POST request:", error.message);
                   setResult('Error fetching response');
@@ -55,6 +62,7 @@ export function JournalInput() {
           };
           
           makePostRequest(savedEntry);
+
 
 
   }
