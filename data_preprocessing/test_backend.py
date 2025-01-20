@@ -1,14 +1,17 @@
 from flask import Flask, request, jsonify
 import requests
 from pyngrok import ngrok
+from flask_cors import CORS
 
 # Initialize Flask app
 app = Flask(__name__)
 
+CORS(app)  # Enable CORS for all routes
+
 # URLs and API keys for testing
-FIRST_API_URL = "https://6cc6-34-125-82-78.ngrok-free.app/predict"
+FIRST_API_URL = "https://9d84-34-30-13-14.ngrok-free.app/predict"
 SECOND_API_URL = "http://127.0.0.1:5000/rerank"
-COHERE_API_URL = "https://6c45-34-105-34-238.ngrok-free.app/invoke"
+COHERE_API_URL = "https://d5bd-34-145-95-7.ngrok-free.app/invoke"
 COHERE_API_KEY = "ucWqFhZQUTBshk778p4ejEKXhwC3Pnrswou2SF2U"
 
 # Preprocessing function for prompt generation
@@ -82,7 +85,15 @@ def process_input():
 
 # Run Flask app
 if __name__ == "__main__":
-    app.run(debug=True, port=8002)
+    from pyngrok import ngrok
+    ngrok.set_auth_token("2rrM0vYQOjcDwtPKMz4GVrfysbL_6fAN64gBUB7SCLBN27cCy")
+# Expose FastAPI on a public URL using ngrok
+    # public_url = ngrok.connect(8003)
+    # print(f"Public URL: {public_url}")
+    app.run(debug=True, port=8003)
+    
+
+
 # import requests
 # # URLs for testing
 # FIRST_API_URL = "https://6cc6-34-125-82-78.ngrok-free.app/predict"

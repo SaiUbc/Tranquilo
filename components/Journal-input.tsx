@@ -12,6 +12,9 @@ export function JournalInput() {
   const [showTextInput, setShowTextInput] = useState(false)
   const [journalEntry, setJournalEntry] = useState('') // State to store the user's input
   const [savedEntry, setSavedEntry] = useState('') // State to store the saved result
+  const [result, setResult] = useState(''); // State to store the LLM result
+
+  // const [postResponse, setPostResponse] = useState('')
 
   const startRecording = () => {
     router.push('/record')
@@ -21,9 +24,42 @@ export function JournalInput() {
     setSavedEntry(journalEntry) // Save the user's input
     setShowTextInput(false) // Hide the input form
     setJournalEntry('') // Clear the input field
+
+    // console.log("Saved Entry:", savedEntry)
+    const makePostRequest = async (saved: string) => {
+            const url = 'http://127.0.0.1:8003/process';
+            const data = {
+                user_input: journalEntry,
+            };
+        
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+        
+                const result = await response.json();
+                result.final_response = result.final_response?.response || 'No response available';
+                                // Get an item
+                const userInput = localStorage.getItem('userInput') || 'No response available';
+                console.log('User input:', userInput);
+
+                setResult(result.final_response || userInput || 'No response');
+              } catch (error) {
+                  console.error("Error making POST request:", error.message);
+                  setResult('Error fetching response');
+              }
+          };
+          
+          makePostRequest(savedEntry);
+
+
   }
   console.log(savedEntry)
-  console.log(journalEntry)
+  // console.log(journalEntry)
   return (
     <Card className="max-w-2xl mx-auto">
       <CardContent className="p-6">
@@ -68,6 +104,16 @@ export function JournalInput() {
           <div className="mt-6">
             <h3 className="text-lg font-semibold">✨ Your Journal Entry:</h3>
             <p className="mt-2 p-4 bg-gray-100 border rounded">{savedEntry}</p>
+          </div>
+        )}
+        {result && ( // Display the LLM result if it exists
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold">✨ LLM Response:</h3>
+            <Textarea
+              className="min-h-[400px] min-w-[600px] bg-gray-100 border rounded"
+              readOnly
+              value={result} // Show the result in the text box
+            />
           </div>
         )}
       </CardContent>

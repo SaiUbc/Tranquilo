@@ -1,147 +1,41 @@
-// import { ElevenLabsClient, play } from "elevenlabs";
-
-// const client = new ElevenLabsClient({
-//     apiKey: "sk_6022161963e9219ec9750a94efde2dc38d242b5207f9fa51", // Replace with your valid API key
-// });
-
-// const textToSpeech = async () => {
-//     try {
-//         const voiceId = "FGY2WhTYpPnrIDTdsKH5"; // Replace with a valid voice ID from the above output
-
-//         const audio = await client.textToSpeech.convert(voiceId, {
-//             text: "Hi, this is an auto-generated voice test",
-//         });
-
-//         console.log("Audio generated successfully:", audio);
-//         // Save or play the audio here
-//         await play(audio);
-//     } catch (error) {
-//         console.error("Error generating text-to-speech:", error.message);
-//         if (error.response) {
-//             console.error("Response body:", await error.response.text());
-//         }
-//     }
-// };
-
-// textToSpeech();
-
-
-
-// import WebSocket from 'ws';
-// import fs from 'fs';
-
-// const API_KEY = "sk_6022161963e9219ec9750a94efde2dc38d242b5207f9fa51"; // Replace with your ElevenLabs API key
-// const VOICE_ID = "FGY2WhTYpPnrIDTdsKH5"; // Replace with a valid voice ID
-// const URL = `wss://api.elevenlabs.io/v1/text-to-speech/${VOICE_ID}/stream-input`;
-
-// // WebSocket connection
-// const ws = new WebSocket(URL, {
-//     headers: {
-//         'xi-api-key': API_KEY
-//     }
-// });
-
-// // Event: Connection opened
-// ws.on('open', () => {
-//     console.log("WebSocket connection opened.");
-
-//     // Step 1: Initialize the connection with a blank space
-//     ws.send(JSON.stringify({
-//         text: " ",
-//         voice_settings: {
-//             stability: 0.5,
-//             similarity_boost: 0.8
-//         }
-//     }));
-
-//     // Step 2: Send the text you want to convert to speech
-//     ws.send(JSON.stringify({
-//         text: "Akshat loves flask, someone pleaseeeee stop him!",
-//         try_trigger_generation: true
-//     }));
-
-//     // Step 3: Close the stream
-//     ws.send(JSON.stringify({ text: "" }));
-// });
-
-// // Event: Receiving audio data
-// ws.on('message', (data) => {
-//     const parsedData = JSON.parse(data);
-//     if (parsedData.audio) {
-//         const audioBuffer = Buffer.from(parsedData.audio, 'base64');
-//         fs.appendFileSync('output.mp3', audioBuffer);
-//         console.log("Audio chunk saved.");
-//     } else if (parsedData.isFinal) {
-//         console.log("Final audio received. Streaming complete.");
-//     }
-// });
-
-// // Event: Connection closed
-// ws.on('close', () => {
-//     console.log("WebSocket connection closed.");
-// });
-
-// // Event: Error handling
-// ws.on('error', (error) => {
-//     console.error("WebSocket error:", error);
-// });
-
-
-// import { ElevenLabsClient } from "elevenlabs";
-// import SpeakerPkg from "speaker"; // Adjust import for CommonJS module
-// const { Speaker } = SpeakerPkg;
-// const { Speaker } = require("speaker");
-
-
-// const client = new ElevenLabsClient({
-//     apiKey: "sk_4fdb72461b0f9b13696ac56bada131b6ae73a373a7bb84f3", // Replace with your ElevenLabs API key
-// });
-
-// const streamAudio = async () => {
-//     try {
-//         // Request streaming audio
-//         const audioStream = await client.generate({
-//             stream: true, // Enable streaming
-//             voice: "Aria", // Replace with the desired voice
-//             text: "This is a real-time streaming voice example.",
-//             model_id: "eleven_multilingual_v2",
-//         });
-
-//         // Configure Speaker instance
-//         const speaker = new Speaker({
-//             channels: 2, // Stereo
-//             bitDepth: 16,
-//             sampleRate: 44100, // Default sample rate for ElevenLabs
-//         });
-
-//         // Pipe audio stream directly to the speaker
-//         audioStream.pipe(speaker);
-
-//         console.log("Streaming audio in real-time...");
-//     } catch (error) {
-//         console.error("Error streaming audio:", error);
-//     }
-// };
-
-// streamAudio();
-
-
 import { ElevenLabsClient } from "elevenlabs";
 import { spawn } from "child_process";
 import Speaker from "speaker";
 import ffmpegPath from "ffmpeg-static";
+import { LocalStorage } from 'node-localstorage';
 
 const client = new ElevenLabsClient({
     apiKey: "sk_4fdb72461b0f9b13696ac56bada131b6ae73a373a7bb84f3", // Replace with your ElevenLabs API key
 });
 
-const streamAudio = async () => {
+const localStorage = new LocalStorage('./storage');
+const response = localStorage.getItem('llmResponse') || 'No response available';
+console.log(response);
+
+const streamAudio = async (input) => {
     try {
         // Request streaming audio
         const audioStream = await client.generate({
             stream: true, // Enable streaming
             voice: "Sarah", // Replace with the desired voice
-            text: "That sounds like a lot, I can understand what you're going through. If you ever feel overwhelmed then call +1 778-266-6666.",
+            text: ```Thank you for reaching out and sharing your feelings with me. I'm so sorry to hear that you're feeling sad and don't have anyone to talk to.
+
+Firstly, please know that it takes immense courage to acknowledge your emotions and seek help. You've taken the first step towards healing, and I'm proud of you for that.
+
+If you haven't already, I want to encourage you to reach out to your doctor or a healthcare professional about how you're feeling. They can offer support, guidance, and potentially prescribe medication to help manage your symptoms.
+
+Additionally, there are many resources available to you:
+
+1. You can call the National Alliance on Mental Illness (NAMI) Helpline at 1-800-950-6264 for emotional support and guidance.
+2. The Crisis Text Line is also available 24/7 by texting "HOME" to 741741. This service provides free, confidential support from trained crisis counselors.
+3. You can visit online resources like Psych Central (https://psychcentral.com/lib/common-hotline-phone-numbers/) for a list of hotlines and helplines in your area.
+
+Remember, you're not alone in this journey. There are people who care about you and want to help. Don't hesitate to reach out to them.
+
+Lastly, I want to acknowledge that it can be challenging to find a therapist or counselor who understands your specific needs. That's why I've included the website [https://therapists.psychologytoday.com](https://therapists.psychologytoday.com) in my response. You can search for therapists in your area and filter results based on their specialties and experience.
+
+Keep in mind that healing is a process, and it may take time to find the right resources and support. Be patient with yourself, and don't give up. You got this.
+            ```,
             model_id: "eleven_multilingual_v2",
         });
 
@@ -156,7 +50,7 @@ const streamAudio = async () => {
         const speaker = new Speaker({
             channels: 1.9, // Stereo
             bitDepth: 16,
-            sampleRate: 44100, // Standard PCM audio sample rate
+            sampleRate: 44100, // Standard PCM audio sample rate 
         });
 
         // Pipe the audio stream through ffmpeg and into the speaker
@@ -169,5 +63,5 @@ const streamAudio = async () => {
     }
 };
 
-streamAudio();
+streamAudio(response);
 

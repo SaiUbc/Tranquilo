@@ -8,6 +8,9 @@ import { Mic, PhoneOff, Volume2 } from 'lucide-react';
 import { cn } from '@/utils';
 import { SentimentBars } from './sentiment-bars';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { LocalStorage } from 'node-localstorage';
+import { Textarea } from './ui/textarea';
+
 
 interface Message {
   id: string;
@@ -38,8 +41,13 @@ export function RecordingInterface({ onClose }: RecordingInterfaceProps) {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const [selectedVoice, setSelectedVoice] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [result, setResult] = useState('');
 
-  console.log('transcript:', transcript);
+
+  // Initialize node-localstorage (store data in a directory named 'storage')
+  // const localStorage = new LocalStorage('./storage');
+
+
   let recognition: SpeechRecognition | null = null;
 
   // Initialize Web Speech API
@@ -141,6 +149,52 @@ export function RecordingInterface({ onClose }: RecordingInterfaceProps) {
         setMessages((prev) => [...prev, assistantResponse]);
       }, 1000);
     }
+
+    async function callRunTosApi() {
+      try {
+        const response = await fetch('http://127.0.0.1:3002/run-tos', {
+          method: 'GET',
+        });
+    
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        console.log('API Response:', data.message || data.error);
+      } catch (error) {
+        console.error('Error calling the API:', error);
+      }
+    }
+  
+
+    const makePostRequest = async (saved: string) => {
+            const url = 'http://127.0.0.1:8003/process';
+            const data = {
+                user_input: saved,
+            };
+        
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+        
+                const result = await response.json();
+                result.final_response = result.final_response?.response || 'No response available';
+                setResult(result.final_response || 'No response');
+                localStorage.setItem('llmResponse', result);
+                callRunTosApi();
+              } catch (error) {
+                  console.error("Error making POST request:", error.message);
+                  setResult('Error fetching response');
+              }
+          };
+          
+      makePostRequest(transcript);
   };
 
   return (
@@ -221,6 +275,16 @@ export function RecordingInterface({ onClose }: RecordingInterfaceProps) {
             </div>
           </div>
         </div>
+        {result && ( // Display the LLM result if it exists
+          <div className="mt-6">
+            <h3 className="text-lg font-semibold">✨ LLM Response:</h3>
+            <Textarea
+              className="min-h-[400px] min-w-[600px] bg-gray-100 border rounded"
+              readOnly
+              value={result} // Show the result in the text box
+            />
+          </div>
+        )}
       </Card>
     </div>
   );
