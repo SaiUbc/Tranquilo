@@ -61,7 +61,7 @@ We used the [Mental Health Counseling Conversations](https://huggingface.co/data
 - **Backend Framework**: Flask  
 - **AI Models**: BERTopic, Llama3.2  
 - **Database**: SQLite  
-- **Deployment**: Local Deployment for Hackathon Presentation using google collab  
+- **Deployment**: Local Deployment for Hackathon Presentation using google colab  
 
 ---
 
