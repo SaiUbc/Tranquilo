@@ -45,7 +45,7 @@ We used the [Mental Health Counseling Conversations](https://huggingface.co/data
 ---
 ## 🎥 Demo
 
-![Demo Video](pics/demo-2.mp4)
+![Demo Video](pics/demo-2.gif)
 
 ---
 
