@@ -78,7 +78,7 @@ A huge thank you to my incredible teammates—Angus Lau, Parth Patel, and Akshat
 
 ## License
 
-This project is licensed under the Apache-2.0 License.
+This project is licensed under the [Apache-2.0 License](LICENSE).
 
 ## Disclaimer 
 
