@@ -57,11 +57,11 @@ We used the [Mental Health Counseling Conversations](https://huggingface.co/data
 ---
 
 ## 💻 Tech Stack
-- **Programming Language**: Python  
-- **Backend Framework**: Flask  
-- **AI Models**: BERTopic, Llama3.2  
-- **Database**: SQLite  
-- **Deployment**: Local Deployment for Hackathon Presentation using google colab  
+- **Programming Language**: Python, TypeScript
+- **Backend Framework**: Flask
+- **AI Models**: BERTopic, Llama3.2 (locally hosted)
+- **Database**: SQLite
+- **Deployment**: Fully locally deployed architecture for data privacy and security. Utilized Ngrok to expose Flask APIs publicly.
 
 ---
 
