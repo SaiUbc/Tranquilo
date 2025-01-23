@@ -43,6 +43,9 @@ We used the [Mental Health Counseling Conversations](https://huggingface.co/data
 ![Architecture Diagram](pics/nwPLUS_Hackathon.jpg) 
 
 ---
+## 🎥 Demo
+
+![Demo Video](pics/demo-2.mp4)
 
 ---
 
